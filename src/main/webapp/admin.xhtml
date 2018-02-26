@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+
+<h:body>
+    <f:view>
+        <h:form>
+            <h:panelGrid columns="1">
+                <h:outputText value="用户名: #{authBean.loginedUser.username}"/>
+                <h:outputText value="邮箱: #{authBean.loginedUser.email}"/>
+                <h:outputText value="账户类型: #{authBean.loginedUser.userType}"/>
+                <h:panelGrid columns="2">
+                    <h:commandButton action="modifyUser" value="修改"/>
+                    <h:commandButton action="#{authBean.logout}" value="登出"/>
+                </h:panelGrid>
+                <h:outputText value="========== 用户列表 =========="/>
+                <h:dataTable value="#{mainViewBean.userList}" var="item" cellspacing="0" border="1">
+                    <h:inputHidden value="#{item.username}"/>
+                    <h:column><f:facet name="header">用户名</f:facet>#{item.username}</h:column>
+                    <h:column><f:facet name="header">邮箱</f:facet>#{item.email}</h:column>
+                    <h:column><f:facet name="header">用户类型</f:facet>#{item.userType}</h:column>
+                    <h:column>
+                        <f:facet name="header">操作</f:facet>
+                        <h:commandButton action="#{mainViewBean.test(item.username)}" value="删除"/>
+                    </h:column>
+                </h:dataTable>
+                <h:outputText value="========== 课程列表 =========="/>
+                <ui:repeat value="#{mainViewBean.userList}" var="item">
+                    <h:panelGrid columns="3">
+                        <h:outputText value="#{item.username}"/>
+                        <h:outputText value="#{item.email}"/>
+                        <h:outputText value="#{item.userType}"/>
+                    </h:panelGrid>
+                </ui:repeat>
+            </h:panelGrid>
+        </h:form>
+    </f:view>
+</h:body>
+</html>

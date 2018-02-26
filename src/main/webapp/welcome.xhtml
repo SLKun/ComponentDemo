@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<h:body bgcolor="white">
+    <f:view>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputText value='Username: '/>
+                <h:inputText value='#{authBean.username}'/>
+                <h:outputText value='Password: '/>
+                <h:inputText value='#{authBean.password}'/>
+                <h:commandButton action="#{authBean.login}" value="Login"/>
+                <h:commandButton action="register" value="Register"/>
+            </h:panelGrid>
+            <h:outputText style="color: red" value='#{authBean.result}'/>
+        </h:form>
+    </f:view>
+</h:body>
+</html>
