@@ -6,15 +6,21 @@ import javax.ejb.Local;
 public interface CookieUtilLocal {
     /**
      * Set Cookie For Response
-     * @param name Cookie Name
-     * @param value  Cookie Value for specific name
      */
     void setCookie(String name, String value);
 
     /**
      * Read Cookie Value for specific name
-     * @param name Cookie Name
-     * @return Cookie Value
      */
     String readCookie(String name);
+
+    /**
+     * Set Session
+     */
+    void setSession(String name, String value);
+
+    /**
+     * Read Session
+     */
+    String readSession(String name);
 }

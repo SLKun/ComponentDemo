@@ -12,10 +12,20 @@ public class CookieUtil implements CookieUtilLocal {
     }
 
     public String readCookie(String name){
-        return String.valueOf(((Cookie)(this.readCookieMap().get("token"))).getValue());
+        return String.valueOf(((Cookie)(this.readCookieMap().get(name))).getValue());
     }
 
     public Map<String, Object> readCookieMap(){
         return FacesContext.getCurrentInstance().getExternalContext().getRequestCookieMap();
+    }
+
+    @Override
+    public void setSession(String name, String value) {
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(name, value);
+    }
+
+    @Override
+    public String readSession(String name) {
+        return String.valueOf(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(name));
     }
 }
