@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ComponentDemo.iml" filepath="$PROJECT_DIR$/ComponentDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EJBPart/EJBPart.iml" filepath="$PROJECT_DIR$/EJBPart/EJBPart.iml" />
     </modules>
   </component>
 </project>
