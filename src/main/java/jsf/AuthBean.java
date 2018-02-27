@@ -20,7 +20,6 @@ public class AuthBean {
     private String email;
     private Integer isTeacher;
     private String result;
-    private UserLocal loginedUser;
 
     public String register() {
         // Check Fields
@@ -56,8 +55,9 @@ public class AuthBean {
             result = "登录失败!";
             return "back";
         }
-        loginedUser = user;
-        cookieUtil.setCookie("token", userManager.loginIn(user));
+        String token = userManager.loginIn(user);
+        cookieUtil.setCookie("token", token);
+        cookieUtil.setSession("token", token);
         if(user.getUserType().equals("管理员")){
             return "admin";
         }else if(user.getUserType().equals("教师帐号")){
@@ -112,13 +112,5 @@ public class AuthBean {
 
     public void setIsTeacher(Integer isTeacher) {
         this.isTeacher = isTeacher;
-    }
-
-    public UserLocal getLoginedUser() {
-        return loginedUser;
-    }
-
-    public void setLoginedUser(UserLocal loginedUser) {
-        this.loginedUser = loginedUser;
     }
 }

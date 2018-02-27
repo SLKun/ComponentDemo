@@ -1,9 +1,6 @@
 package jsf;
 
-import component.CookieUtilLocal;
-import component.CourseManager;
-import component.UserLocal;
-import component.UserManager;
+import component.*;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -18,6 +15,7 @@ public class MainViewBean {
     @EJB
     private CookieUtilLocal cookieUtil;
 
+    private String lastPageName;
     private String result;
 
     private String oldPassword;
@@ -30,16 +28,34 @@ public class MainViewBean {
     }
 
     public String modifyUser(String username){
-        UserLocal user = userManager.getUser(username);
-        if(user.checkPassword(oldPassword)){
-            user.modifyUser(newPassword, newEmail);
-            return "success";
+        if(username == null || username.isEmpty()){
+            return retrievePageName();
         }
-        return "back";
+        UserLocal user = userManager.getUser(username);
+        if(user != null && user.checkPassword(oldPassword)){
+            user.modifyUser(newPassword, newEmail);
+            return retrievePageName();
+        }else {
+            result = "原密码错误!";
+            return "back";
+        }
+    }
+
+    public void deleteUser(String username){
+        if(username != null && !username.isEmpty()){
+            if(username.equals("admin")){
+                result = "不允许删除管理员帐户!";
+            }else{
+                userManager.deleteUser(username);
+            }
+        }
     }
 
     public UserLocal getLoginedUser() {
         String token = cookieUtil.readCookie("token");
+        if(token == null || token.isEmpty()){
+            token = cookieUtil.readSession("token");
+        }
         return userManager.getOnlineUser(token);
     }
 
@@ -56,6 +72,23 @@ public class MainViewBean {
             }
         });
         return list;
+    }
+
+    public Collection<CourseLocal> getCourseList() {
+        List<CourseLocal> list = new ArrayList<>(courseManager.getCourseList());
+        return list;
+    }
+
+    @SuppressWarnings("Duplicates")
+    private String retrievePageName(){
+        UserLocal user = getLoginedUser();
+        if(user.getUserType().equals("管理员")){
+            return "admin";
+        }else if(user.getUserType().equals("教师帐号")){
+            return "teacher";
+        }else{
+            return "student";
+        }
     }
 
     public void setOldPassword(String oldPassword) {

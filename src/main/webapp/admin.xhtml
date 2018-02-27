@@ -11,32 +11,34 @@
     <f:view>
         <h:form>
             <h:panelGrid columns="1">
-                <h:outputText value="用户名: #{authBean.loginedUser.username}"/>
-                <h:outputText value="邮箱: #{authBean.loginedUser.email}"/>
-                <h:outputText value="账户类型: #{authBean.loginedUser.userType}"/>
+                <h:outputText value="用户名: #{mainViewBean.loginedUser.username}"/>
+                <h:outputText value="邮箱: #{mainViewBean.loginedUser.email}"/>
+                <h:outputText value="账户类型: #{mainViewBean.loginedUser.userType}"/>
                 <h:panelGrid columns="2">
                     <h:commandButton action="modifyUser" value="修改"/>
                     <h:commandButton action="#{authBean.logout}" value="登出"/>
                 </h:panelGrid>
                 <h:outputText value="========== 用户列表 =========="/>
-                <h:dataTable value="#{mainViewBean.userList}" var="item" cellspacing="0" border="1">
-                    <h:inputHidden value="#{item.username}"/>
-                    <h:column><f:facet name="header">用户名</f:facet>#{item.username}</h:column>
-                    <h:column><f:facet name="header">邮箱</f:facet>#{item.email}</h:column>
-                    <h:column><f:facet name="header">用户类型</f:facet>#{item.userType}</h:column>
+                <h:dataTable value="#{mainViewBean.userList}" var="userItem" cellspacing="0" border="1">
+                    <h:column><f:facet name="header">用户名</f:facet>#{userItem.username}</h:column>
+                    <h:column><f:facet name="header">邮箱</f:facet>#{userItem.email}</h:column>
+                    <h:column><f:facet name="header">用户类型</f:facet>#{userItem.userType}</h:column>
                     <h:column>
                         <f:facet name="header">操作</f:facet>
-                        <h:commandButton action="#{mainViewBean.test(item.username)}" value="删除"/>
+                        <h:commandButton action="#{mainViewBean.deleteUser(userItem.username)}" value="删除"/>
                     </h:column>
                 </h:dataTable>
+                <h:outputText style="color: red" value='#{authBean.result}'/>
                 <h:outputText value="========== 课程列表 =========="/>
-                <ui:repeat value="#{mainViewBean.userList}" var="item">
-                    <h:panelGrid columns="3">
-                        <h:outputText value="#{item.username}"/>
-                        <h:outputText value="#{item.email}"/>
-                        <h:outputText value="#{item.userType}"/>
-                    </h:panelGrid>
-                </ui:repeat>
+                <h:dataTable value="#{mainViewBean.courseList}" var="courseItem" cellspacing="0" border="1">
+                    <h:column><f:facet name="header">课程名</f:facet>#{courseItem.courseName}</h:column>
+                    <h:column><f:facet name="header">教师</f:facet>#{courseItem.teacher.username}</h:column>
+                    <h:column><f:facet name="header">上课地点</f:facet>#{courseItem.location}</h:column>
+                    <h:column>
+                        <f:facet name="header">操作</f:facet>
+                        <h:commandButton action="#{mainViewBean.test(courseItem.courseName)}" value="删除"/>
+                    </h:column>
+                </h:dataTable>
             </h:panelGrid>
         </h:form>
     </f:view>

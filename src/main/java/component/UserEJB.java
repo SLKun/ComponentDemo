@@ -14,7 +14,7 @@ public class UserEJB implements UserLocal {
     private String password;
     private String email;
     private UserType userType;
-    private List<Course> courseList;
+    private List<CourseEJB> courseList;
 
     @Override
     public boolean register(String username, String password, String email, UserType type) {
@@ -56,7 +56,7 @@ public class UserEJB implements UserLocal {
         return "";
     }
 
-    public List<Course> getCourseList() {
+    public List<CourseEJB> getCourseList() {
         return courseList;
     }
 }
