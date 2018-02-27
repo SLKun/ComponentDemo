@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/jsf-managedBean-and-ejb.iml" filepath="$PROJECT_DIR$/jsf-managedBean-and-ejb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ComponentDemo.iml" filepath="$PROJECT_DIR$/ComponentDemo.iml" />
     </modules>
   </component>
 </project>
