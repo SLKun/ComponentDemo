@@ -14,5 +14,5 @@ public interface UserLocal {
     String getUsername();
     String getEmail();
     String getUserType();
-    List<CourseEJB> getCourseList();
+    List<CourseLocal> getCourseList();
 }

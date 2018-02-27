@@ -27,6 +27,7 @@ public class CourseManager {
                     CourseLocal course = InitialContext.doLookup("java:global/CourseEJB");
                     course.addCourse(c[0], userManager.getUser("math"), c[1]);
                     courseMap.put(c[0], course);
+                    userManager.getUser("math").addCourse(course);
                 }
             }catch(NamingException e){
                 e.printStackTrace();

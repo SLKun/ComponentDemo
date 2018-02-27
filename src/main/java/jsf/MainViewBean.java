@@ -15,7 +15,6 @@ public class MainViewBean {
     @EJB
     private CookieUtilLocal cookieUtil;
 
-    private String lastPageName;
     private String result;
 
     private String oldPassword;
@@ -77,6 +76,15 @@ public class MainViewBean {
     public Collection<CourseLocal> getCourseList() {
         List<CourseLocal> list = new ArrayList<>(courseManager.getCourseList());
         return list;
+    }
+
+    public Collection<CourseLocal> getCourseListForUser(String username) {
+        List<CourseLocal> list = new ArrayList<>(courseManager.getCourseList());
+        return list;
+    }
+
+    public void addCourseForUser(String username){
+//        userManager.getUser(username).addCourse();
     }
 
     @SuppressWarnings("Duplicates")

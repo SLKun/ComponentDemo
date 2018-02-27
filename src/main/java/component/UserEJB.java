@@ -1,6 +1,7 @@
 package component;
 
 import javax.ejb.Stateful;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -14,7 +15,7 @@ public class UserEJB implements UserLocal {
     private String password;
     private String email;
     private UserType userType;
-    private List<CourseEJB> courseList;
+    private List<CourseLocal> courseList = new ArrayList<>();
 
     @Override
     public boolean register(String username, String password, String email, UserType type) {
@@ -34,6 +35,16 @@ public class UserEJB implements UserLocal {
     public void modifyUser(String password, String email) {
         this.password = password;
         this.email = email;
+    }
+
+    @Override
+    public void addCourse(CourseLocal course) {
+        courseList.add(course);
+    }
+
+    @Override
+    public void deleteCourse(CourseLocal course) {
+        courseList.remove(course);
     }
 
     public String getUsername() {
@@ -56,7 +67,7 @@ public class UserEJB implements UserLocal {
         return "";
     }
 
-    public List<CourseEJB> getCourseList() {
+    public List<CourseLocal> getCourseList() {
         return courseList;
     }
 }

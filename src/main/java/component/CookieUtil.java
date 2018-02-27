@@ -12,7 +12,12 @@ public class CookieUtil implements CookieUtilLocal {
     }
 
     public String readCookie(String name){
-        return String.valueOf(((Cookie)(this.readCookieMap().get(name))).getValue());
+        Cookie cookie = (Cookie)this.readCookieMap().get(name);
+        if(cookie != null){
+            return cookie.getValue();
+        }else{
+            return null;
+        }
     }
 
     public Map<String, Object> readCookieMap(){
