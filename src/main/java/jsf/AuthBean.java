@@ -1,9 +1,6 @@
 package jsf;
 
-import component.CookieUtilLocal;
-import component.UserEJB;
-import component.UserLocal;
-import component.UserManager;
+import component.*;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -14,6 +11,8 @@ public class AuthBean {
     private UserManager userManager;
     @EJB
     private CookieUtilLocal cookieUtil;
+    @EJB
+    private ConstantUtilLocal constantUtil;
 
     private String username;
     private String password;
@@ -46,11 +45,7 @@ public class AuthBean {
     }
 
     public String login() {
-        if (username == null || username.isEmpty()) {
-            result = "用户名为空!";
-            return "back";
-        }
-        UserLocal user = userManager.getUser(username);
+        UserBean user = userManager.getUser(username);
         if (user == null || !user.checkPassword(password)) {
             result = "登录失败!";
             return "back";
@@ -58,13 +53,7 @@ public class AuthBean {
         String token = userManager.loginIn(user);
         cookieUtil.setCookie("token", token);
         cookieUtil.setSession("token", token);
-        if(user.getUserType().equals("管理员")){
-            return "admin";
-        }else if(user.getUserType().equals("教师帐号")){
-            return "teacher";
-        }else{
-            return "student";
-        }
+        return constantUtil.retrievePageName(user);
     }
 
     public String logout() {

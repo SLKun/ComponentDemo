@@ -10,17 +10,17 @@
         <h:form>
             <h:panelGrid columns="2">
                 <h:outputText value='Username: '/>
-                <h:outputText value='#{mainViewBean.loginedUser.username}'/>
+                <h:outputText value='#{mainViewBean.loginUser.username}'/>
                 <h:outputText value='Old Password: '/>
                 <h:inputText value='#{mainViewBean.oldPassword}'/>
                 <h:outputText value='New Password: '/>
                 <h:inputText value='#{mainViewBean.newPassword}'/>
                 <h:outputText value='Email: '/>
                 <h:inputText value='#{mainViewBean.newEmail}' />
-                <h:commandButton action="#{mainViewBean.modifyUser(mainViewBean.loginedUser.username)}" value="提交"/>
+                <h:commandButton action="#{mainViewBean.modifyUser(mainViewBean.loginUser.username)}" value="提交"/>
                 <h:commandButton action="#{mainViewBean.modifyUser(null)}" value="返回"/>
             </h:panelGrid>
-            <h:outputText style="color: red" value='#{authBean.result}'/>
+            <h:outputText style="color: red" value='#{mainViewBean.result}'/>
         </h:form>
     </f:view>
 </h:body>

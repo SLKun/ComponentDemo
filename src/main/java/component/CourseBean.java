@@ -3,13 +3,13 @@ package component;
 import javax.ejb.Local;
 
 @Local
-public interface CourseLocal {
-    void addCourse(String courseName, UserLocal teacher, String location);
-
+public interface CourseBean {
+    String getId();
+    void setId(String id);
     String getCourseName();
     void setCourseName(String courseName);
-    UserLocal getTeacher();
-    void setTeacher(UserLocal teacher);
+    UserBean getTeacher();
+    void setTeacher(UserBean teacher);
     String getLocation();
     void setLocation(String location);
 }

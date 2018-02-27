@@ -4,30 +4,37 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
 >
 
 <h:body>
     <f:view>
         <h:form>
             <h:panelGrid columns="1">
-                <h:outputText value="用户名: #{mainViewBean.loginedUser.username}"/>
-                <h:outputText value="邮箱: #{mainViewBean.loginedUser.email}"/>
-                <h:outputText value="账户类型: #{mainViewBean.loginedUser.userType}"/>
+                <h:outputText value="用户名: #{mainViewBean.loginUser.username}"/>
+                <h:outputText value="邮箱: #{mainViewBean.loginUser.email}"/>
+                <h:outputText value="账户类型: #{mainViewBean.loginUser.userTypeStr}"/>
                 <h:panelGrid columns="2">
                     <h:commandButton action="modifyUser" value="修改"/>
                     <h:commandButton action="#{authBean.logout}" value="登出"/>
                 </h:panelGrid>
                 <h:outputText value="========== 课程列表 =========="/>
-                <h:dataTable value="#{mainViewBean.getCourseListForUser(mainViewBean.loginedUser.username)}" var="courseItem" cellspacing="0" border="1">
+                <h:dataTable value="#{mainViewBean.userCourses}" var="courseItem" cellspacing="0" border="1">
                     <h:column><f:facet name="header">课程名</f:facet>#{courseItem.courseName}</h:column>
                     <h:column><f:facet name="header">教师</f:facet>#{courseItem.teacher.username}</h:column>
                     <h:column><f:facet name="header">上课地点</f:facet>#{courseItem.location}</h:column>
                     <h:column>
                         <f:facet name="header">操作</f:facet>
-                        <h:commandButton action="#{mainViewBean.test(courseItem.courseName)}" value="删除"/>
+                        <h:commandButton action="#{mainViewBean.deleteCourse(courseItem.id)}" value="删除"/>
                     </h:column>
                 </h:dataTable>
+                <h:outputText value="========== 添加课程 =========="/>
+                <h:panelGrid columns="2">
+                    <h:outputText value='课程名: '/>
+                    <h:inputText value='#{mainViewBean.courseName}'/>
+                    <h:outputText value='上课地点: '/>
+                    <h:inputText value='#{mainViewBean.location}'/>
+                    <h:commandButton action="#{mainViewBean.addCourse}" value="添加"/>
+                </h:panelGrid>
             </h:panelGrid>
         </h:form>
     </f:view>
