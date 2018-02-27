@@ -1,6 +1,7 @@
 package component;
 
 import javax.ejb.Local;
+import java.util.List;
 
 @Local
 public interface CourseBean {
@@ -12,4 +13,5 @@ public interface CourseBean {
     void setTeacher(UserBean teacher);
     String getLocation();
     void setLocation(String location);
+    List<UserBean> getStudents();
 }

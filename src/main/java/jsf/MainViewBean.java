@@ -68,12 +68,34 @@ public class MainViewBean {
         return list;
     }
 
+    public void chooseCourse(String courseId){
+        CourseBean course = courseManager.getCourse(courseId);
+        if(!loginUser.getCourseList().contains(course)){
+            // student-course
+            getLoginUser().addCourse(course);
+            // course-student
+            course.getStudents().add(getLoginUser());
+        }
+    }
+
+    public void withdrawalCourse(String courseId){
+        CourseBean course = courseManager.getCourse(courseId);
+        // student-course
+        getLoginUser().deleteCourse(course);
+        // course-student
+        course.getStudents().remove(getLoginUser());
+    }
+
     /** Course Management **/
     public void deleteCourse(String courseId){
         CourseBean course = courseManager.getCourse(courseId);
         // delete teacher-course
-        UserBean teacher = course.getTeacher();
-        teacher.deleteCourse(course);
+        course.getTeacher().deleteCourse(course);
+        // delete student-course
+        List<UserBean> students = course.getStudents();
+        for(UserBean s : students){
+            s.deleteCourse(course);
+        }
         // delete course
         courseManager.deleteCourse(courseId);
     }
@@ -151,9 +173,5 @@ public class MainViewBean {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public void test(String username) {
-        System.out.println("TEST" + username);
     }
 }

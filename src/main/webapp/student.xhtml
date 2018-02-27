@@ -22,6 +22,20 @@
                     <h:column><f:facet name="header">课程名</f:facet>#{courseItem.courseName}</h:column>
                     <h:column><f:facet name="header">教师</f:facet>#{courseItem.teacher.username}</h:column>
                     <h:column><f:facet name="header">上课地点</f:facet>#{courseItem.location}</h:column>
+                    <h:column>
+                        <f:facet name="header">操作</f:facet>
+                        <h:commandButton action="#{mainViewBean.withdrawalCourse(courseItem.id)}" value="退选"/>
+                    </h:column>
+                </h:dataTable>
+                <h:outputText value="========== 选课列表 =========="/>
+                <h:dataTable value="#{mainViewBean.courseList}" var="courseItem" cellspacing="0" border="1">
+                    <h:column><f:facet name="header">课程名</f:facet>#{courseItem.courseName}</h:column>
+                    <h:column><f:facet name="header">教师</f:facet>#{courseItem.teacher.username}</h:column>
+                    <h:column><f:facet name="header">上课地点</f:facet>#{courseItem.location}</h:column>
+                    <h:column>
+                        <f:facet name="header">操作</f:facet>
+                        <h:commandButton action="#{mainViewBean.chooseCourse(courseItem.id)}" value="选课"/>
+                    </h:column>
                 </h:dataTable>
             </h:panelGrid>
         </h:form>

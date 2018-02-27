@@ -19,7 +19,7 @@ public class CourseEJB implements CourseManager, CourseBean {
     private String courseName;
     private UserBean teacher;
     private String location;
-    private List<UserBean> students;
+    private List<UserBean> students = new ArrayList<>();
 
     /**
      * Constructor
@@ -105,5 +105,9 @@ public class CourseEJB implements CourseManager, CourseBean {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public List<UserBean> getStudents() {
+        return students;
     }
 }
