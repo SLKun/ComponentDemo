@@ -114,7 +114,7 @@ public class UserEJB implements UserManager, UserBean {
     public void deleteUser(String username) {
         UserBean user = getUser(username);
         if(!user.getCourseList().isEmpty()){
-            List<CourseBean> courses = user.getCourseList();
+            List<CourseBean> courses = new ArrayList<>(user.getCourseList());
             for(CourseBean course : courses){
                 getCourseManager().deleteCourse(course.getId());
             }
