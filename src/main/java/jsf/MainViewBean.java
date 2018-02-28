@@ -74,7 +74,7 @@ public class MainViewBean {
             // student-course
             getLoginUser().addCourse(course);
             // course-student
-            course.getStudents().add(getLoginUser());
+            course.addStudent(getLoginUser());
         }
     }
 
@@ -83,7 +83,7 @@ public class MainViewBean {
         // student-course
         getLoginUser().deleteCourse(course);
         // course-student
-        course.getStudents().remove(getLoginUser());
+        course.deleteStudent(getLoginUser());
     }
 
     /** Course Management **/
@@ -101,14 +101,12 @@ public class MainViewBean {
     }
 
     public Collection<CourseBean> getCourseList() {
-        List<CourseBean> list = new ArrayList<>(courseManager.getCourseList());
-        return list;
+        return new ArrayList<>(courseManager.getCourseList());
     }
 
     public Collection<CourseBean> getUserCourses(){
-        courseManager.getCourseList();
-        List<CourseBean> list = new ArrayList<>(getLoginUser().getCourseList());
-        return list;
+        courseManager.getCourseList(); // init courseManger
+        return new ArrayList<>(getLoginUser().getCourseList());
     }
 
     public void addCourse(){

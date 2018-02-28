@@ -14,4 +14,8 @@ public interface CourseBean {
     String getLocation();
     void setLocation(String location);
     List<UserBean> getStudents();
+    // Operator
+    void modifyCourse(UserBean teacher, String location);
+    void addStudent(UserBean student);
+    void deleteStudent(UserBean student);
 }

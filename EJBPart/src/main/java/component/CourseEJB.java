@@ -44,6 +44,25 @@ public class CourseEJB implements CourseManager, CourseBean {
     }
 
     /**
+     * Operator
+     **/
+    @Override
+    public void modifyCourse(UserBean teacher, String location) {
+        this.teacher = teacher;
+        this.location = location;
+    }
+
+    @Override
+    public void addStudent(UserBean student) {
+        students.add(student);
+    }
+
+    @Override
+    public void deleteStudent(UserBean student) {
+        students.remove(student);
+    }
+
+    /**
      * Manager Method
      **/
     @Override
